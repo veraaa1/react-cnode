@@ -41,7 +41,7 @@ class Home extends Component {
         );
     }
     update=()=>{
-        this.forceupdate()
+        // this.forceupdate()
     }
 }
 export default Home;
