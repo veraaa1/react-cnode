@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import styled from 'styled-components'
+import { Link} from 'react-router-dom';
 import { Skeleton,Pagination } from 'antd'
 class Topic extends Component {
     state={
@@ -45,7 +46,14 @@ class Topic extends Component {
         }]
         console.log(topics);
         
-        const topicsItem = topics.map(e=><li key={e.id}><img src={e.author.avatar_url} alt=""/><a href="javascript:;">{e.title}</a></li>)  
+        const topicsItem = topics.map(e=><li key={e.id}><img src={e.author.avatar_url} alt=""/>
+        <span className='count'>
+            <span>{e.reply_count}</span>
+            /
+            <span>{e.visit_count}</span>
+        </span> 
+        <span className={e.top||e.good?'top':'default'}>{e.top?'置顶':e.good?'精华':e.tab==='share'?'分享':e.tab==='ask'?'问答':'招聘'}</span>
+        <Link to={`/topic/${e.id}`}>{e.title}</Link></li>)  
         return (
             <div>
                 {
@@ -89,11 +97,32 @@ li>img{
     margin-right:10px;
     border-radius:5px;
 }
+li>.count{
+    line-height:30px;
+    display:inline-block;
+    width:70px;
+}
 li:hover{
     background-color:#f5f5f5;
 }
 li:hover a{
     text-decoration:underline
+}
+li>.top{
+    background-color:#80bd01;
+    color: #fff;
+    padding:0 5px;
+    border-radius:3px;
+    height: 24px;
+    line-height:24px;
+}
+li>.default{
+    background-color:#e5e5e5;
+    color: #999;
+    padding:0 5px;
+    border-radius:3px;
+    height: 24px;
+    line-height:24px;
 }
 li>a{
     display: block;
@@ -104,6 +133,7 @@ li>a{
     color: #000;
     font-size:14px;
     line-height:30px;
+    padding-left:10px;
 }
 :first-child{
     border:none;

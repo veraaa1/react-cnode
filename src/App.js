@@ -22,9 +22,3 @@ class App extends Component {
 }
 
 export default App;
-// const Wrap = styled.div`
-// width:660px;
-// border-radius:8px;
-// background-color:#fff;
-
-// `

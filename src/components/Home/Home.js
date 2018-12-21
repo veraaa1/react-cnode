@@ -45,8 +45,10 @@ class Home extends Component {
 }
 export default Home;
 const Wrap = styled.div`
-width:660px;
+width:910px;
 background-color:#fff;
+margin-right:10px;
+border-radius:5px 5px 0 0 ;
  .nav-list{
      list-style:none;
      width:100%;
