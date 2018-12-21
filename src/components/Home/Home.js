@@ -27,22 +27,21 @@ class Home extends Component {
             txt:'招聘',
             num:16*40+34
         }]
-        const navLi = navArr.map(e=><li key={e.type}><NavLink to={`/${e.type==='all'?'':e.type}`} onClick={
-            this.update
-          } exact={e.type==='all'?true:false}>{e.txt}</NavLink></li>)      
+        const navLi = navArr.map(e=><li key={e.type}><NavLink to={`/${e.type==='all'?'':e.type}`} exact={e.type==='all'?true:false}>{e.txt}</NavLink></li>)      
         return (
             <Wrap>
                 <ul className="nav-list">
                     {navLi}
                 </ul>
                   <Route component={Topic} path="/" exact/>
-                  <Route component={Topic} path="/:tab"/>
+                  <Route component={Topic} path="/good"/>
+                  <Route component={Topic} path="/share"/>
+                  <Route component={Topic} path="/ask"/>
+                  <Route component={Topic} path="/job"/>
             </Wrap>
         );
     }
-    update=()=>{
-        // this.forceupdate()
-    }
+  
 }
 export default Home;
 const Wrap = styled.div`

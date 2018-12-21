@@ -10,7 +10,7 @@ class Topic extends Component {
         current:1
        }
     componentDidMount() {
-        const tab = this.props.match.params.tab
+        const tab = this.props.location.pathname.replace('/','')
         const url = `https://cnodejs.org/api/v1/topics?tab=${tab?tab:'all'}&page=1`
         Axios.get(url).then(res=>{
             this.setState({
