@@ -46,14 +46,14 @@ class Topic extends Component {
         }]
         console.log(topics);
         
-        const topicsItem = topics.map(e=><li key={e.id}><img src={e.author.avatar_url} alt=""/>
+        const topicsItem = topics.map(e=><li key={e.id}><Link to={`/user/${e.author.loginname}`} className="userImg"><img src={e.author.avatar_url} alt=""/></Link>
         <span className='count'>
             <span>{e.reply_count}</span>
             /
             <span>{e.visit_count}</span>
         </span> 
         <span className={e.top||e.good?'top':'default'}>{e.top?'置顶':e.good?'精华':e.tab==='share'?'分享':e.tab==='ask'?'问答':'招聘'}</span>
-        <Link to={`/topic/${e.id}`}>{e.title}</Link></li>)  
+        <Link to={`/topic/${e.id}`} className='title'>{e.title}</Link></li>)  
         return (
             <div>
                 {
@@ -91,11 +91,19 @@ li{
     display:flex;
     
 }
-li>img{
+li>.userImg{
+    display: inline-block;
     width:30px;
     height: 30px;
+    text-decoration:none;
+    
     margin-right:10px;
+}
+li>a>img{
+    width:100%;
+    height: 30px;
     border-radius:5px;
+    
 }
 li>.count{
     line-height:30px;
@@ -124,7 +132,7 @@ li>.default{
     height: 24px;
     line-height:24px;
 }
-li>a{
+li>.title{
     display: block;
     max-width:70%;
     text-overflow:ellipsis;

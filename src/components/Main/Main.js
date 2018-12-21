@@ -5,6 +5,8 @@ import Post from '../Post/Post';
 import styled from 'styled-components'
 import PersonalInfo from '../PersonalInfo/PersonalInfo'
 import Login from '../Login/Login';
+import AuthorPersonalPage from '../AuthorPersonalPage/AuthorPersonalPage'
+import AuthorInfo from '../AuthorInfo/AuthorInfo';
 class Main extends Component {
     render() {
         return (
@@ -12,11 +14,13 @@ class Main extends Component {
                 <Switch>
                     <Route component={Login} path='/login'/>
                     <Route component={Post} path='/topic/:id'/>
+                    <Route component={AuthorPersonalPage} path='/user/:authorname'/>
                     <Route component={Home} path='/'/> 
                </Switch>
                <Switch>
-               <Route component={PersonalInfo} path='/'/>
-               {/* <PersonalInfo/> */}
+                    <Route component={AuthorInfo} path='/user/:authorname'/>
+                    <Route component={AuthorInfo} path='/topic/:id'/>
+                    <Route component={PersonalInfo} path='/'/>
                </Switch>
             </Wrap>
         );

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Topic from '../Topics/Topic';
 import {filter} from '../static/filter'
 import { Skeleton } from 'antd'
+import AuthorInfo from '../AuthorInfo/AuthorInfo';
 class Post extends Component {
     state={
         topicContent:null
@@ -25,12 +26,11 @@ class Post extends Component {
         console.log(topicContent);
         
         return (
-            <Wrap>
-                {topicContent?<><h1>{topicContent.title}</h1>
-
-                <div className='author-Info'><span>作者:{topicContent.author.loginname}&nbsp;&nbsp;来自:{filter(topicContent.tab)}</span></div>
-                <div dangerouslySetInnerHTML={{ __html: topicContent.content}}></div></>:<Skeleton  active={true} title={false} paragraph={{ rows: 40 }} style={{width:'400px',margin:'0 auto'}}/>}
-            </Wrap>
+                <Wrap>
+                    {topicContent?<><h1>{topicContent.title}</h1>
+                    <div className='author-Info'><span>作者:{topicContent.author.loginname}&nbsp;&nbsp;来自:{filter(topicContent.tab)}</span></div>
+                    <div dangerouslySetInnerHTML={{ __html: topicContent.content}}></div></>:<Skeleton  active={true} title={false} paragraph={{ rows: 40 }} style={{width:'400px',margin:'0 auto'}}/>}
+                </Wrap>
         );
     }
 }
