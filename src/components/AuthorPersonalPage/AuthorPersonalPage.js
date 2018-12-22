@@ -47,14 +47,14 @@ class AuthorPersonalPage extends Component {
                       <div className="recent-Topics">
                         <p className="tit">最近创建的话题</p>
                              {
-                               detail? <ul>{detail.recent_topics.map(e=><li><Link to={`/user/${detail.loginname}`}><img src={detail.avatar_url} onClick={this.up}  alt=""/></Link><Link to={`/topic/${e.id}`}>{e.title}</Link></li>)}</ul>:<></>
+                               detail? <ul>{detail.recent_topics.map(e=><li><Link to={`/user/${detail.loginname}`}><img src={detail.avatar_url}  alt=""/></Link><Link to={`/topic/${e.id}`}>{e.title}</Link></li>)}</ul>:<></>
                              }
                          
                       </div>
                       <div className="recent-reply">
                       <p className="tit">最近参与的话题</p>
                             {
-                               detail? <ul>{detail.recent_replies.map(e=><li><Link to={`/user/${e.author.loginname}`} onClick={this.up}><img src={e.author.avatar_url} alt="" /></Link><Link to={`/topic/${e.id}`}>{e.title}</Link></li>)}</ul>:<></>
+                               detail? <ul>{detail.recent_replies.map(e=><li><Link to={`/user/${e.author.loginname}`} ><img src={e.author.avatar_url} alt="" /></Link><Link to={`/topic/${e.id}`}>{e.title}</Link></li>)}</ul>:<></>
                              }
 
                       </div>

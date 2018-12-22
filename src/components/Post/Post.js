@@ -33,7 +33,7 @@ class Post extends Component {
                     <div className="comment">
                         <p>{topicContent.replies.length}条回复</p>
                         <ul>
-                            {topicContent.replies.map(e=><li><Link to={`/user/${e.author.loginname}`} onClick={this.up}><img src={e.author.avatar_url} alt=""/></Link><span>{e.author
+                            {topicContent.replies.map(e=><li><Link to={`/user/${e.author.loginname}`}><img src={e.author.avatar_url} alt=""/></Link><span>{e.author
                             .loginname}</span><div className="com" dangerouslySetInnerHTML={{ __html: e.content}}></div><a href="#">{e.ups.length}个赞</a></li>)}
                         </ul>
                     </div>
