@@ -48,8 +48,6 @@ class AuthorInfo extends Component {
     render() {
         const{AuthorInfo,lookDetail}=this.state
        console.log(AuthorInfo);
-       
-        
         return (
             <div>
             {AuthorInfo?
@@ -61,8 +59,9 @@ class AuthorInfo extends Component {
                  <Link to={`/user/${AuthorInfo.loginname}`}><img src={AuthorInfo.avatar_url} alt=""/></Link><span>{AuthorInfo.loginname}</span></Author>
                 }
                 </div>
+                {sessionStorage.token?<NewTopicEnter/>:<></>}
              </AuthorCon>
-               {sessionStorage.token?<NewTopicEnter/>:<></>}
+               
              </div>
              :<></>
             }

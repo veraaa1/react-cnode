@@ -41,8 +41,6 @@ class NewTopic extends Component {
             Axios.post(`https://cnodejs.org/api/v1/topics`,{
                 accesstoken:token,title:title,tab:'dev',content:topic
             }).then(res=>{
-                console.log('sfsfd');
-                
                 this.setState({
                     title:'',
                     topic:''

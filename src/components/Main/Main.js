@@ -22,10 +22,14 @@ class Main extends Component {
                     <Route component={Home} path='/'/> 
                </Switch>
                <Switch>
-                    <Route component={AuthorInfo} path='/user/:authorname'/>
+                    {/* <Route component={AuthorInfo} path='/user/:authorname'/> */}
                     <Route component={TopicAttention} path='/topic/create'/>
                     <Route component={AuthorInfo} path='/topic/:id'/>
-                    <Route component={PersonalInfo} path='/'/>
+                    <Route component={PersonalInfo} path='/share'/>
+                    <Route component={PersonalInfo} path='/good'/>
+                    <Route component={PersonalInfo} path='/ask'/>
+                    <Route component={PersonalInfo} path='/job'/>
+                    <Route component={PersonalInfo} path='/' exact/>
                </Switch>
             </Wrap>
         );

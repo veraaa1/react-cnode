@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components'
 import AuthorInfo from '../AuthorInfo/AuthorInfo';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link ,Switch} from 'react-router-dom';
+import NewTopicEnter from '../NewTopicEnter/NewTopicEnter'
 class AuthorPersonalPage extends Component {
     state={
         detail:null,
-        authorTopics:null
+        authorTopics:null,
+       isShowAu:false
     }
     componentDidMount() {
         const location = this.props.location.pathname
@@ -27,7 +29,9 @@ class AuthorPersonalPage extends Component {
         })
     }
     render() {
-        const {detail,authorTopics}=this.state
+        const {detail,authorTopics,isShowAu}=this.state
+        console.log(isShowAu);
+        
         return (
             <Content>
                 <Wrap>
@@ -54,7 +58,9 @@ class AuthorPersonalPage extends Component {
                       <div className="recent-reply">
                       <p className="tit">最近参与的话题</p>
                             {
-                               detail? <ul>{detail.recent_replies.map(e=><li><Link to={`/user/${e.author.loginname}`} ><img src={e.author.avatar_url} alt="" /></Link><Link to={`/topic/${e.id}`}>{e.title}</Link></li>)}</ul>:<></>
+                               detail? <ul>{detail.recent_replies.map(e=><li><Link to={`/user/${e.author.loginname}`} onClick={()=>{
+                                    this.up(e.author)
+                               }}><img src={e.author.avatar_url} alt="" /></Link><Link to={`/topic/${e.id}`}>{e.title}</Link></li>)}</ul>:<></>
                              }
 
                       </div>
@@ -62,12 +68,25 @@ class AuthorPersonalPage extends Component {
                     }
                     
                 </Wrap>
-                <AuthorInfo/>
+                {detail? <AuthorCon>
+                <h3>作者信息</h3> 
+                <div>
+                 <Author>
+                 <Link to={`/user/${detail.loginname}`}><img src={detail.avatar_url} alt=""/></Link><span>{detail.loginname}</span></Author>
+                </div>
+                {sessionStorage.token?<NewTopicEnter/>:<></>}
+             </AuthorCon>:<></>}
             </Content>
         );
     }
-    up=()=>{
-    this.forceupdate()
+    up=(obj)=>{
+        console.log(obj);
+        Axios.get(`https://cnodejs.org/api/v1/user/${obj.loginname}`).then(res=>{
+            this.setState({
+                detail:res.data.data,
+                isShowAu:true
+            })
+        })
     }
 }
 
@@ -156,4 +175,26 @@ width:90%;
 margin:0 auto;
 display:flex;
 border-radius:5px;
+`
+const Author=styled.div`
+width:100%
+img{
+    width:50px;
+    height:50px;
+    margin:10px;
+    border-radius:5px;
+}
+`
+const AuthorCon=styled.div`
+width:290px;
+border-radius:5px;
+height:200px;
+>div{
+    background-color:#fff;
+}
+h3{
+    background-color: #eee;
+    border-radius:5px 5px 0 0;
+    margin-bottom:0;
+}
 `
