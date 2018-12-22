@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import Axios from 'axios';
+import NewTopicEnter from '../NewTopicEnter/NewTopicEnter';
 class PersonalInfo extends Component {
     state={
         token:'',
@@ -26,6 +27,8 @@ class PersonalInfo extends Component {
     
     render() {
         const {token,userInfo}=this.state
+        console.log(userInfo);
+        
         return (
             <Wrap>
                 {/* h5 的本地存储:将本地信息暂时存储到浏览器中 
@@ -34,16 +37,19 @@ class PersonalInfo extends Component {
                 sessionStorage(关闭浏览器就没了)
                 */}
                 <h3>个人信息</h3>
-                <Person >
+                
                    {
-                       userInfo?<div><img src={userInfo.avatar_url} alt=""/><span className="username">{userInfo.loginname}</span>
+                       userInfo? <div>
+                           <Person><img src={userInfo.avatar_url} alt=""/><span className="username">{userInfo.loginname}</span>
                        <p>积分:0</p>
                        <p>“ 这家伙很懒，什么个性签名都没有留下。 ”</p>
-                       <button className="logout" onClick={this.logout}>退出</button></div>:<div><input type="text" name="" id="" value={token} onChange={this.handleChange} />
-                       <button onClick={this.login} className="login">登录</button></div>
+                       <button className="logout" onClick={this.logout}>退出</button>
+                       </Person>
+                       <NewTopicEnter/>
+                   </div>
+                       :<Person><input type="text" name="" id="" value={token} onChange={this.handleChange} />
+                       <button onClick={this.login} className="login">登录</button></Person>
                    }
-                    
-               </Person>
             </Wrap>
         );
     }
@@ -59,6 +65,7 @@ class PersonalInfo extends Component {
         Axios.post(url,{accesstoken:token}).then(res=>{
             sessionStorage.loginname=res.data.loginname
             sessionStorage.avatar_url=res.data.avatar_url
+            sessionStorage.token = token
             console.log(res.data);
             
             this.setState({
@@ -68,7 +75,7 @@ class PersonalInfo extends Component {
                 }
             })
         }).catch(res=>{
-            console.log('不对呀');
+            alert('不对呀');
             
         })
     }
@@ -83,7 +90,7 @@ class PersonalInfo extends Component {
 
 export default PersonalInfo;
 const Wrap=styled.div`
-width:270px;
+width:290px;
 background-color: #fff;
 border-radius:5px 5px 0 0;
 height: 200px;
@@ -125,17 +132,17 @@ border-radius:3px;
     padding-left:15px;
     line-height:50px;
 }
-input{
+>input{
     outline:none;
     border:1px solid #ccc;
     height:30px;
 }
-img{
+>img{
     width:50px;
     height:50px;
     border-radius:50%;
 }
-p{
+>p{
     font-size:12px;
     font-style:italic;
     margin-bottom:0;

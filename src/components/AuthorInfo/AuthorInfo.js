@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import Axios from 'axios';
+import NewTopicEnter from '../NewTopicEnter/NewTopicEnter';
 class AuthorInfo extends Component {
     state={
         AuthorInfo:null,
@@ -13,6 +14,8 @@ class AuthorInfo extends Component {
         if(param!==null){
             if(param.id){
                 const id = param.id
+                console.log(id);
+                
                 const url= ` https://cnodejs.org/api/v1/topic/${id}`
             Axios.get(url).then(res=>{
                 this.setState({
@@ -22,6 +25,8 @@ class AuthorInfo extends Component {
             }
             else if(param.authorname!==''){
                 const username =param.authorname
+                console.log(username);
+                
                 const url= ` https://cnodejs.org/api/v1/user/${username}`
             Axios.get(url).then(res=>{
                 console.log(res.data);
@@ -48,6 +53,7 @@ class AuthorInfo extends Component {
         return (
             <div>
             {AuthorInfo?
+            <div>
             <AuthorCon>
                 <h3>作者信息</h3> 
                 <div>{
@@ -55,7 +61,10 @@ class AuthorInfo extends Component {
                  <Link to={`/user/${AuthorInfo.loginname}`}><img src={AuthorInfo.avatar_url} alt=""/></Link><span>{AuthorInfo.loginname}</span></Author>
                 }
                 </div>
-             </AuthorCon>:<></>
+             </AuthorCon>
+               {sessionStorage.token?<NewTopicEnter/>:<></>}
+             </div>
+             :<></>
             }
             
             </div>
@@ -69,6 +78,8 @@ width:100%
 img{
     width:50px;
     height:50px;
+    margin:10px;
+    border-radius:5px;
 }
 `
 const AuthorCon=styled.div`
