@@ -3,6 +3,8 @@ import Axios from 'axios';
 import styled from 'styled-components'
 import { Link} from 'react-router-dom';
 import { Skeleton,Pagination } from 'antd'
+import Moment from 'react-moment';
+import 'moment/locale/zh-cn'
 class Topic extends Component {
     state={
         topics:[],
@@ -53,7 +55,7 @@ class Topic extends Component {
             <span>{e.visit_count}</span>
         </span> 
         <span className={e.top||e.good?'top':'default'}>{e.top?'置顶':e.good?'精华':e.tab==='share'?'分享':e.tab==='ask'?'问答':'招聘'}</span>
-        <Link to={`/topic/${e.id}`} className='title'>{e.title}</Link></li>)  
+        <Link to={`/topic/${e.id}`} className='title'>{e.title}</Link><Moment fromNow locale="zh-cn">{e.last_reply_at}</Moment></li>)  
         return (
             <div>
                 {

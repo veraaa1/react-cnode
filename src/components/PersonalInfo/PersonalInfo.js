@@ -65,6 +65,7 @@ class PersonalInfo extends Component {
         Axios.post(url,{accesstoken:token}).then(res=>{
             sessionStorage.loginname=res.data.loginname
             sessionStorage.avatar_url=res.data.avatar_url
+            sessionStorage.id = res.data.id
             sessionStorage.token = token
             console.log(res.data);
             

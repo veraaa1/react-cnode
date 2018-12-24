@@ -5,16 +5,19 @@ import Axios from 'axios';
 class NewTopic extends Component {
     state={
         title:'',
-        topic:''
+        topic:'',
+        topicId:''
     }
     render() {
-        const {title,topic}=this.state
+        const {title,topic,topicId}=this.state
+        console.log(topicId);
+        
         return (
             <Wrap>
                 <h3><Link to="/">主页</Link>/发布话题</h3>
                 <input type="text" id="title" placeholder="enter your title" value={title} onChange={this.onChange}/>
                 <input type="text" id="content" value={topic} onChange={this.onChangeCon}/>
-                <button className="submit" onClick={this.addTopic}>提交</button>
+                <Link className="submit" onClick={this.addTopic} to={topicId!==''?`/topic/${topicId}`:``}>提交</Link>
             </Wrap>
         );
     }
@@ -41,9 +44,12 @@ class NewTopic extends Component {
             Axios.post(`https://cnodejs.org/api/v1/topics`,{
                 accesstoken:token,title:title,tab:'dev',content:topic
             }).then(res=>{
+                console.log(res.data.topic_id);
+                
                 this.setState({
                     title:'',
-                    topic:''
+                    topic:'',
+                    topicId:res.data.topic_id
                 })
             })
             
